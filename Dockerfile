@@ -6,4 +6,4 @@ RUN ["/bin/sh", "-c", "pip3 install -U awscli"]
 
 COPY ["src", "/src/"]
 
-ENTRYPOINT ["/usr/bin/env","bash","-c","/src/main.sh"]
+ENTRYPOINT ["/usr/bin/env","bash","-xc","/src/main.sh"]
