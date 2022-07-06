@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 function terragruntPlan {
   # Gather the output of `terragrunt plan`.
