@@ -32,7 +32,7 @@ ${initOutput}
     initCommentWrapper=$(stripColors "${initCommentWrapper}")
     echo "init: info: creating JSON"
     initPayload=$(echo "${initCommentWrapper}" | jq -R --slurp '{body: .}')
-    initCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.review_comments_url)
+    initCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
     echo "init: info: commenting on the pull request"
     echo "${initPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${initCommentsURL}" > /dev/null
   fi

@@ -40,7 +40,7 @@ ${taintOutput}
     taintCommentWrapper=$(stripColors "${taintCommentWrapper}")
     echo "taint: info: creating JSON"
     taintPayload=$(echo "${taintCommentWrapper}" | jq -R --slurp '{body: .}')
-    taintCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.review_comments_url)
+    taintCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
     echo "taint: info: commenting on the pull request"
     echo "${taintPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${taintCommentsURL}" > /dev/null
   fi

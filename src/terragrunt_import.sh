@@ -38,7 +38,7 @@ ${importOutput}
     importCommentWrapper=$(stripColors "${importCommentWrapper}")
     echo "import: info: creating JSON"
     importPayload=$(echo "${importCommentWrapper}" | jq -R --slurp '{body: .}')
-    importCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.review_comments_url)
+    importCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
     echo "import: info: commenting on the pull request"
     echo "${importPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${importCommentsURL}" > /dev/null
   fi
