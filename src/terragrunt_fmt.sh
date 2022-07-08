@@ -61,7 +61,7 @@ ${fmtComment}
     fmtCommentWrapper=$(stripColors "${fmtCommentWrapper}")
     echo "fmt: info: creating JSON"
     fmtPayload=$(echo "${fmtCommentWrapper}" | jq -R --slurp '{body: .}')
-    fmtCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
+    fmtCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.review_comments_url)
     echo "fmt: info: commenting on the pull request"
     echo "${fmtPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${fmtCommentsURL}" > /dev/null
   fi

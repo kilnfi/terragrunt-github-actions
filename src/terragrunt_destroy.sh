@@ -38,7 +38,7 @@ ${destroyOutput}
     destroyCommentWrapper=$(stripColors "${destroyCommentWrapper}")
     echo "destroy: info: creating JSON"
     destroyPayload=$(echo "${destroyCommentWrapper}" | jq -R --slurp '{body: .}')
-    destroyCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
+    destroyCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.review_comments_url)
     echo "destroy: info: commenting on the pull request"
     echo "${destroyPayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${destroyCommentsURL}" > /dev/null
   fi

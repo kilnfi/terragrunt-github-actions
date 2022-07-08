@@ -32,7 +32,7 @@ ${validateOutput}
     validateCommentWrapper=$(stripColors "${validateCommentWrapper}")
     echo "validate: info: creating JSON"
     validatePayload=$(echo "${validateCommentWrapper}" | jq -R --slurp '{body: .}')
-    validateCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.comments_url)
+    validateCommentsURL=$(cat ${GITHUB_EVENT_PATH} | jq -r .pull_request.review_comments_url)
     echo "validate: info: commenting on the pull request"
     echo "${validatePayload}" | curl -s -S -H "Authorization: token ${GITHUB_TOKEN}" --header "Content-Type: application/json" --data @- "${validateCommentsURL}" > /dev/null
   fi
